@@ -18,13 +18,13 @@ $$\frac{\partial L}{\partial x} = J_f^\top v$$
 >
 > $$L_{\mathrm{scaled}} = L \cdot S, \qquad g_{\mathrm{unscaled}} = \frac{1}{S}\, g_{\mathrm{scaled}}$$
 >
-> *loss scaling $S \approx 2^{16}$ 이 어떻게 small gradient 를 FP16 표현 범위로 끌어올리고, optimizer step 전 unscale 이 정확성을 보장하는지 수치적으로 이해할 수 있는 것은 다르다.*
+> *loss scaling* $S \approx 2^{16}$ *이 어떻게 small gradient 를 FP16 표현 범위로 끌어올리고, optimizer step 전 unscale 이 정확성을 보장하는지 수치적으로 이해할 수 있는 것은 다르다.*
 >
 > *CUDA kernel 을 **이름으로 아는 것** 과, GPU 의 SM·warp·shared memory 계층, reduction 의 tree-based vs warp-shuffle 구현 차이,*
 >
 > $$\text{Coalesced} : 1\ \text{transaction} \quad \text{vs.} \quad \text{Non-coalesced} : 32\ \text{transactions}$$
 >
-> *memory coalescing 이 만드는 $100\times$ bandwidth 차이를 roofline model 로 이해할 수 있는 것은 다르다.*
+> *memory coalescing 이 만드는* $100\times$ *bandwidth 차이를 roofline model 로 이해할 수 있는 것은 다르다.*
 >
 > *`torch.compile` 의 한 줄을 **쓰는 것** 과, TorchDynamo 가 CPython frame evaluation (PEP 523) 으로 bytecode 수준에서 graph 를 capture 하고, AOTAutograd 가 forward + backward graph 를 functionalize 하고, TorchInductor 가 Triton 으로 kernel 을 생성하는 파이프라인을 한 단계씩 따라갈 수 있는 것은 다르다.*
 
