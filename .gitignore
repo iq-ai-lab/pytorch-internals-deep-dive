@@ -1,0 +1,280 @@
+# =============================================================================
+# PyTorch Internals Deep Dive — .gitignore
+# =============================================================================
+
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+
+# Distribution / Packaging
+.Python
+build/
+dist/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+MANIFEST
+sdist/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ── Jupyter Notebook ─────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# ── PyTorch / NumPy / weight files ───────────────────────────────────────────
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.joblib
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+*.ckpt
+
+# Framework caches
+.torch_cache/
+.torch_extensions/
+torch_extensions/
+
+# ── CUDA / C++ extension build artifacts ─────────────────────────────────────
+# Ch5-01 cpp_extension 의 JIT compile 산출물
+*.cu.o
+*.cuda.o
+*.obj
+*.a
+*.lib
+*.dylib
+*.dll
+*.exp
+*.pdb
+*.cubin
+*.fatbin
+*.ptx
+
+# Ninja build (cpp_extension 의 backend)
+*.ninja
+*.ninja_log
+*.ninja_deps
+.ninja/
+build_ext/
+
+# CUDA generated files
+*.gpu
+*.gch
+
+# ── Triton cache ─────────────────────────────────────────────────────────────
+# Ch5-03 Triton kernel JIT 캐시
+.triton/
+.triton_cache/
+~/.triton/
+triton_cache/
+
+# ── TorchInductor / torch.compile cache ──────────────────────────────────────
+# Ch7 torch.compile 의 kernel 캐시
+.torchinductor_cache/
+torchinductor_*/
+~/.cache/torch/inductor/
+__torch_dynamo__/
+__torch_inductor__/
+.dynamo_cache/
+
+# ── Profiling outputs ────────────────────────────────────────────────────────
+# Nsight Compute / Systems (Ch4 · Ch5)
+*.ncu-rep
+*.nsys-rep
+*.sqlite
+*.qdrep
+*.qdstrm
+profiler_output/
+profile_logs/
+
+# torch.profiler
+*.json.gz
+*.pt.trace.json
+*.pt.trace.json.gz
+chrome_trace/
+trace_*.json
+
+# py-spy / cProfile
+*.prof
+*.cprof
+*.pyspy
+flamegraph.svg
+flamegraph.html
+
+# nvprof (legacy)
+*.nvvp
+*.nvprof
+
+# ── Experiment outputs ───────────────────────────────────────────────────────
+# 생성된 시각화 · micro-benchmark plot · learning curve (각 챕터)
+# Ch1: stride 시각화 · NCHW vs NHWC 의 cuDNN dispatch
+# Ch2: computation graph (torchviz) · custom Function gradient 검증
+# Ch3: dispatcher routing trace · TORCH_LIBRARY custom op
+# Ch4: roofline plot · coalesced vs non-coalesced bandwidth · reduction step 별
+# Ch5: cpp_extension throughput · Triton vs cuBLAS GEMM · kernel fusion 효과
+# Ch6: FP16 underflow histogram · GradScaler trajectory · BF16/TF32 정확도
+# Ch7: torch.compile speedup · Inductor 가 생성한 Triton kernel · DDP 호환성
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+*.gif
+*.mp4
+*.webm
+*.webp
+
+# 훈련 결과 / 체크포인트
+results/
+outputs/
+logs/
+checkpoints/
+runs/
+wandb/
+mlruns/
+tensorboard/
+tb_logs/
+lightning_logs/
+*.log
+*.csv
+*.tfevents.*
+
+# 직접 작성한 custom kernel 의 build 산출물 (소스는 보존)
+ch5-custom-kernel/build/
+ch5-custom-kernel/*.so
+ch5-custom-kernel/dist/
+
+# 재현 실험 산출물 (논문별)
+reproductions/baydin2018_ad_survey/*.pkl
+reproductions/pearlmutter1994_hvp/*.pt
+reproductions/harris_reduction/*.cu.o
+reproductions/tillet2019_triton/*.pt
+reproductions/dao2022_flashattn/*.pt
+reproductions/micikevicius2018_amp/*.pt
+reproductions/kalamkar2019_bf16/*.pt
+reproductions/croci2022_stochastic_rounding/*.pkl
+reproductions/ansel2022_dynamo/*.pkl
+
+# ── HuggingFace cache (Ch7-05 distributed 실험에서 사용) ─────────────────────
+.cache/huggingface/
+hub/
+models--*/
+datasets_cache/
+
+# ── Hyperparameter sweeps ────────────────────────────────────────────────────
+sweeps/
+optuna_studies/
+*.db
+*.sqlite3
+
+# ── IDE / Editor ─────────────────────────────────────────────────────────────
+# JetBrains (PyCharm, CLion, IntelliJ)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Vim / Emacs
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.directory
+
+# ── Documentation build ──────────────────────────────────────────────────────
+docs/_build/
+docs/generated/
+site/
+.mkdocs_cache/
+
+# ── Secrets / Credentials ────────────────────────────────────────────────────
+.env.local
+.env.*.local
+secrets.py
+credentials.json
+*.pem
+*.key
+openai_api_key*
+hf_token*
+wandb_api_key*
+
+# ── GPU / CUDA system cache ──────────────────────────────────────────────────
+.nv/
+.nv_cache/
+.nvidia/
+.cuda_cache/
+~/.nv/
+
+# ── Compiled extensions / build artifacts ────────────────────────────────────
+compile_commands.json
+.cmake/
+CMakeCache.txt
+CMakeFiles/
+cmake-build-*/
+
+# ── Miscellaneous ────────────────────────────────────────────────────────────
+.hypothesis/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+*.mo
+*.pot
+
+# data/ 디렉토리 (학습용 데이터 보존)
+data/
+datasets/
+raw/
+processed/
+!data/.gitkeep
